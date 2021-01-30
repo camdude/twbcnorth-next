@@ -1,0 +1,21 @@
+.PillButton {
+  display: inline-block;
+  margin: 0 0.5rem;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.4rem 2rem;
+  background-color: $color-tertiary;
+  color: $color-black;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: top;
+  cursor: pointer;
+  
+
+  &:hover {
+    background-color: $color-tertiary-dark;
+    color: $color-black;
+  }
+}

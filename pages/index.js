@@ -1,65 +1,41 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Button from "../components/Button";
+import Card from "../components/Card";
+import Layout from "../layouts/Layout";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+    <Layout
+      meta={{
+        title: "Home",
+      }}
+    >
+      <div className="Hero">
+        <div className="Hero__heading">Tasmanian Women's Bible Conference</div>
+        <div className="Hero__content">
+          A day conference for women whose desire is to have their minds, hearts
+          and lives shaped by the Bible.
         </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+      </div>
+      <div className="CTA">
+        <div className="CTA__container">
+          <Card
+            heading="This Years Conference"
+            btnText="Register"
+            link="/register"
+          >
+            Find out all the infomation for this years conference and then
+            register for the conference.
+          </Card>
+          <Card
+            heading="Past Conference Talks"
+            btnText="Listen"
+            link="/conferences"
+          >
+            Missed a conference or want to listen to the talks again. You can do
+            that all here.
+          </Card>
+        </div>
+      </div>
+    </Layout>
+  );
 }

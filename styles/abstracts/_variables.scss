@@ -1,0 +1,31 @@
+// Colour
+$color-primary:  #47acbe;
+$color-primary-light: lighten($color-primary, 12);
+$color-primary-dark: darken($color-primary, 8);
+
+$color-secondary: #213f5a;
+$color-secondary-light: lighten($color-secondary, 8);
+$color-secondary-dark: darken($color-secondary, 8);
+
+$color-tertiary:  #4db085;
+$color-tertiary-light: lighten($color-tertiary, 8);
+$color-tertiary-dark: darken($color-tertiary, 8);
+
+$color-danger: #cc0000;
+$color-warning: #dd820a;
+$color-success: #50b04d;
+
+$color-white: #ffffff;
+$color-grey-lighter: #eeeeee;
+$color-grey-light: #e3e3e3;
+$color-grey: #d9d9d9;
+$color-grey-dark: #5e5e5e;
+$color-grey-darker: #444444;
+$color-black: #353535;
+
+// Font
+
+$default-font-family: "Noto Sans", sans-serif;
+$default-font-size: 1.6rem;
+$default-font-color: $color-grey-dark;
+

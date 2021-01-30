@@ -1,0 +1,16 @@
+.Card {
+  margin: 1rem;
+  padding: 2rem;
+  max-width: 40%;
+  background-color: $color-grey-light;
+  box-shadow: 0 .6rem 1.2rem rgba($color-grey-dark, .6);
+
+  &__content {
+      font-size: $default-font-size;
+      margin-bottom: 2rem;
+  }
+
+  &__action {
+      text-align: right;
+  }
+}
