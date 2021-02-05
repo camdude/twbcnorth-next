@@ -23,7 +23,7 @@ const Footer = () => {
                 href="tel:0422926053"
                 target="blank"
               >
-                <FontAwesomeIcon icon={["fas", "phone"]} /> Phone
+                <FontAwesomeIcon icon="phone" /> Phone
               </a>
             </li>
             <li className="Footer__listItem">

@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Button = ({ children, href, onClick, disabled = false }) => {
+const Button = ({ children, href, type, onClick, disabled = false }) => {
   if (href) {
     return (
       <Link href={href}>
@@ -9,16 +9,25 @@ const Button = ({ children, href, onClick, disabled = false }) => {
         </a>
       </Link>
     );
-  } else {
+  }
+  if (type) {
     return (
-      <a
+      <button
         className={`Button ${!disabled || "Button--disabled"}`}
-        onClick={onClick}
+        type={type}
       >
         {children}
-      </a>
+      </button>
     );
   }
+  return (
+    <a
+      className={`Button ${!disabled || "Button--disabled"}`}
+      onClick={onClick}
+    >
+      {children}
+    </a>
+  );
 };
 
 export default Button;

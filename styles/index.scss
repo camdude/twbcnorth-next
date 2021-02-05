@@ -14,10 +14,14 @@
 @import "components/modal";
 @import "components/pillButton";
 @import "components/postList";
+@import "components/formElements/input";
 
 @import "layout/blog";
 @import "layout/footer";
 @import "layout/navbar";
 @import "layout/section";
 
+@import "pages/About";
+@import "pages/Contact";
 @import "pages/Home";
+@import "pages/Register";
