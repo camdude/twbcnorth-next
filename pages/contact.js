@@ -9,7 +9,7 @@ import {
 import Button from "../components/Button";
 import { getContactDetails } from "../lib/api";
 
-export default function Contact({contactDetails}) {
+export default function Contact({ contactDetails }) {
   const [formState, inputHandler] = useForm({
     name: {
       value: "",
@@ -25,9 +25,30 @@ export default function Contact({contactDetails}) {
     },
   });
 
-  const onMessageSubmit = event => {
+  const onMessageSubmit = (event) => {
     event.preventDefault();
     console.log(formState);
+
+    const data = {
+      token: process.env.API_EMAIL_SECRET,
+      recipient: {
+        name: formState.inputs.name.value,
+        email: formState.inputs.email.value,
+        message: formState.inputs.message.value,
+      },
+    };
+
+    fetch("/api/email/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (
@@ -38,9 +59,7 @@ export default function Contact({contactDetails}) {
     >
       <div className="Contact">
         <h1 className="heading-primary">Contact</h1>
-        <p className="paragraph">
-          {contactDetails[0].desc}
-        </p>
+        <p className="paragraph">{contactDetails[0].desc}</p>
         <div className="Contact__content">
           <div className="Contact__card">
             <h2 className="heading-secondary">Send us a message</h2>
@@ -72,7 +91,9 @@ export default function Contact({contactDetails}) {
                 rules={[RULE_VALIDATOR_REQUIRED]}
                 errorMsg="Please enter your message."
               />
-              <Button type="submit" disabled={!formState.isFormValid}>Send</Button>
+              <Button type="submit" disabled={!formState.isFormValid}>
+                Send
+              </Button>
             </form>
           </div>
           <div className="Contact__card">
@@ -80,15 +101,23 @@ export default function Contact({contactDetails}) {
             <ul className="Contact__details">
               <li>
                 <FontAwesomeIcon icon="envelope" />{" "}
-                <a href={`mailto:${contactDetails[0].email}`}>{contactDetails[0].email}</a>
+                <a href={`mailto:${contactDetails[0].email}`}>
+                  {contactDetails[0].email}
+                </a>
               </li>
               <li>
                 <FontAwesomeIcon icon="phone" />{" "}
-                <a href={`tel:${contactDetails[0].phone}`}>{contactDetails[0].phone}</a>
+                <a href={`tel:${contactDetails[0].phone}`}>
+                  {contactDetails[0].phone}
+                </a>
               </li>
               <li>
                 <FontAwesomeIcon icon={["fab", "facebook-square"]} />{" "}
-                <a href={`https://www.facebook.com/${contactDetails[0].facebook}/`}>{contactDetails[0].facebook}</a>
+                <a
+                  href={`https://www.facebook.com/${contactDetails[0].facebook}/`}
+                >
+                  {contactDetails[0].facebook}
+                </a>
               </li>
             </ul>
           </div>
@@ -98,10 +127,9 @@ export default function Contact({contactDetails}) {
   );
 }
 
-
 export async function getStaticProps() {
   const contactDetails = await getContactDetails();
   return {
-    props: { contactDetails }
+    props: { contactDetails },
   };
 }
