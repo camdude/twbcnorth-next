@@ -10,6 +10,7 @@ import Button from "../components/Button";
 import { getContactDetails } from "../lib/api";
 import Recaptcha from "react-recaptcha";
 import Head from "next/head";
+import RichTextBlock from "../components/RichTextBlock";
 
 export default function Contact({ contactDetails }) {
   const [formState, inputHandler] = useForm({
@@ -82,7 +83,8 @@ export default function Contact({ contactDetails }) {
       </Head>
       <div className="Contact">
         <h1 className="heading-primary">Contact</h1>
-        <p className="paragraph">{contactDetails[0].desc}</p>
+        {/* <p className="paragraph">{contactDetails[0].desc}</p> */}
+        <RichTextBlock blocks={contactDetails[0].desc} />
         <div className="Contact__content">
           <div className="Contact__card">
             <h2 className="heading-secondary">Send us a message</h2>

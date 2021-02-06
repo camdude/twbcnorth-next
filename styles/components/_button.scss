@@ -1,7 +1,9 @@
 .Button {
   display: inline-block;
+  margin: 1rem 0;
   border: none;
   padding: 2rem 4rem;
+  width: 100%;
   box-shadow: 0 0 0.2rem 0 $color-black;
   background-color: $color-primary;
   color: $color-white;
@@ -10,11 +12,6 @@
   text-transform: uppercase;
   text-decoration: none;
   text-align: center;
-
-  @include respond(tab-port) {
-    margin: 1rem 0;
-    width: 100%;
-  }
 
   &:hover {
     background-color: $color-primary-dark;

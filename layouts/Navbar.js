@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import TwbcLogo from "../public/logo.svg";
 
 const Navbar = () => {
   const [navOpen, setnavOpen] = useState(false);
@@ -18,14 +19,15 @@ const Navbar = () => {
             }}
           />
         </div>
-        <div className="Navbar__title">TWBC North</div>
+        <div className="Navbar__title">
+          <Link href="/">
+            <a>
+              <TwbcLogo fill="#213f5a"/>
+            </a>
+          </Link>
+        </div>
       </div>
       <ul className={`Navbar__list ${navOpen ? "Navbar__list--open" : ""}`}>
-        <li className="Navbar__item">
-          <Link href="/">
-            <a className="Navbar__link">Home</a>
-          </Link>
-        </li>
         <li className="Navbar__item">
           <Link href="/about">
             <a className="Navbar__link">About</a>
@@ -37,8 +39,13 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="Navbar__item">
+          <Link href="/conference">
+            <a className="Navbar__link">Conference</a>
+          </Link>
+        </li>
+        <li className="Navbar__item">
           <Link href="/conferences">
-            <a className="Navbar__link">Conferences</a>
+            <a className="Navbar__link">Past Talks</a>
           </Link>
         </li>
         <li className="Navbar__item">

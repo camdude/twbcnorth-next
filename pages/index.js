@@ -28,7 +28,7 @@ export default function Home() {
           <Card
             heading="Past Conference Talks"
             btnText="Listen"
-            link="/conferences"
+            link="/conference"
           >
             Missed a conference or want to listen to the talks again. You can do
             that all here.

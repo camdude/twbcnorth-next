@@ -1,0 +1,87 @@
+.RichTextBlock {
+  &__h1 {
+    display: block;
+    margin-bottom: 1.2rem;
+    font-size: 4rem;
+    line-height: 1.25;
+    text-transform: capitalize;
+    color: $color-primary-light;
+  }
+
+  &__h2 {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-size: 3rem;
+    text-transform: capitalize;
+    color: $color-secondary-light;
+  }
+
+  &__h3 {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 2.4rem;
+    text-transform: capitalize;
+    color: $color-black;
+  }
+
+  &__h4 {
+    display: block;
+    margin-bottom: 0.2rem;
+    font-size: 2rem;
+    text-transform: capitalize;
+    color: $color-secondary;
+  }
+
+  &__h5 {
+    display: block;
+    margin-bottom: 0.2rem;
+    font-size: $default-font-size;
+    font-style: italic;
+    text-transform: capitalize;
+    color: $color-tertiary-dark;
+  }
+
+  &__h6 {
+    display: block;
+    margin-bottom: 0.2rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: $color-primary-light;
+  }
+
+  &__quote {
+    display: block;
+    margin: 1rem 0;
+    border-left: 3px solid $color-tertiary;
+    padding: 0.5rem 1.5rem;
+    font-size: 1.6rem;
+    font-style: italic;
+    color: $color-grey-dark;
+  }
+
+  &__break {
+    height: 4rem;
+  }
+
+  &__paragraph {
+    font-size: $default-font-size;
+    line-height: 1.2;
+    text-align: justify;
+
+    &:not(:last-child) {
+      margin-bottom: 1.6rem;
+    }
+
+    & > a {
+      text-decoration: none;
+      color: $color-secondary;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+        color: $color-primary-light;
+      }
+    }
+  }
+}
