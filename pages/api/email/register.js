@@ -18,7 +18,18 @@ export default async function completeRegistration(req, res) {
       to: `${recipient.name} <${recipient.email}>`,
       subject: "Registration For TWBC Conference",
       html: `
-        <p>Thankyou for registerting for this years conference. We look forward to seeing you soon.</p>
+        <p>Thankyou for registering for this years conference. We will send you another email once we have received your payment to confirm your registration.</p>
+        <p>For your records, this is the information you have provided us with. If anything appears to be incorrect please <a href="mailto:twbcnorth@outlook.com">contact us.</a></p>
+        <table style="width:100%">
+          ${registrationData
+            .map((i) => {
+              return `<tr>
+                      <td><b>${i.name}:</b></td>
+                      <td>${i.value}</td>
+                  </tr>`;
+            })
+            .join("\n")}
+        </table>
         `,
     },
     {

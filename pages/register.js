@@ -8,6 +8,7 @@ import Head from "next/head";
 
 export default function Register({ registrationForm }) {
   const [formState, inputHandler] = useForm();
+  // TODO: Fix initial state for select tags
 
   const recaptchaLoaded = () => {
     inputHandler("recaptcha", "Loaded", false);
@@ -19,7 +20,6 @@ export default function Register({ registrationForm }) {
 
   const onRegisterSubmit = (event) => {
     event.preventDefault();
-    console.log(formState);
     if (formState.isFormValid === true) {
       const inputs = Object.entries(formState.inputs);
       inputs.pop();
@@ -30,7 +30,6 @@ export default function Register({ registrationForm }) {
           return { name: i[0], value: i[1].value };
         }),
       };
-      console.log(data);
       fetch("/api/email/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -66,66 +65,70 @@ export default function Register({ registrationForm }) {
           vel, fuga quas ipsum accusantium maiores incidunt! Excepturi, quas
           necessitatibus.
         </p>
-        <div className="Register__content">
-          <div className="Register__card">
-            <h3 className="heading-tertiary">Register</h3>
-            <form className="Register__form" onSubmit={onRegisterSubmit}>
-              {registrationForm[0].form.map((i) => {
-                if (i.element == "input") {
-                  return (
-                    <Input
-                      key={i.name}
-                      id={i.name}
-                      element="text"
-                      placeholder={i.name}
-                      label={i.name}
-                      onInput={inputHandler}
-                      rules={i.validation}
-                      errorMsg={i.errMsg}
-                    />
-                  );
-                } else if (i.element === "textarea") {
-                  return (
-                    <Input
-                      key={i.name}
-                      id={i.name}
-                      element="textarea"
-                      placeholder={i.name}
-                      label={i.name}
-                      initialValid={true}
-                      onInput={inputHandler}
-                      rules={i.validation}
-                      errorMsg={i.errMsg}
-                    />
-                  );
-                } else if (i.element === "select") {
-                  return (
-                    <Input
-                      key={i.name}
-                      id={i.name}
-                      element="select"
-                      label={i.name}
-                      options={i.selection}
-                      initialValid={true}
-                      onInput={inputHandler}
-                      rules={i.validation}
-                      errorMsg={i.errMsg}
-                    />
-                  );
-                }
-              })}
-              <Recaptcha
-                sitekey={process.env.RECAPTCHA_SITE_KEY}
-                render="explicit"
-                onloadCallback={recaptchaLoaded}
-                verifyCallback={recaptchaVerify}
-              />
-              <Button type="submit" disabled={!formState.isFormValid}>
-                Send
-              </Button>
-            </form>
+        {registrationForm[0].active ? (
+          <div className="Register__content">
+            <div className="Register__card">
+              <h3 className="heading-tertiary">Register</h3>
+              <form className="Register__form" onSubmit={onRegisterSubmit}>
+                {registrationForm[0].form.map((i) => {
+                  if (i.element == "input") {
+                    return (
+                      <Input
+                        key={i.name}
+                        id={i.name}
+                        element="text"
+                        placeholder={i.name}
+                        label={i.name}
+                        onInput={inputHandler}
+                        rules={i.validation}
+                        errorMsg={i.errMsg}
+                      />
+                    );
+                  } else if (i.element === "textarea") {
+                    return (
+                      <Input
+                        key={i.name}
+                        id={i.name}
+                        element="textarea"
+                        placeholder={i.name}
+                        label={i.name}
+                        initialValid={true}
+                        onInput={inputHandler}
+                        rules={i.validation}
+                        errorMsg={i.errMsg}
+                      />
+                    );
+                  } else if (i.element === "select") {
+                    return (
+                      <Input
+                        key={i.name}
+                        id={i.name}
+                        element="select"
+                        label={i.name}
+                        options={i.selection}
+                        initialValid={true}
+                        onInput={inputHandler}
+                        rules={i.validation}
+                        errorMsg={i.errMsg}
+                      />
+                    );
+                  }
+                })}
+                <Recaptcha
+                  sitekey={process.env.RECAPTCHA_SITE_KEY}
+                  render="explicit"
+                  onloadCallback={recaptchaLoaded}
+                  verifyCallback={recaptchaVerify}
+                />
+                <Button type="submit" disabled={!formState.isFormValid}>
+                  Send
+                </Button>
+              </form>
+            </div>
           </div>
-        </div>
+        ) : (
+          <h3 className="heading-tertiary">Registrations Closed</h3>
+        )}
       </div>
     </Layout>
   );
