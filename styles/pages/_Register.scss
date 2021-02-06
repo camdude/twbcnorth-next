@@ -16,13 +16,9 @@
   &__card {
     margin: 1rem 0;
     padding: 2rem;
-    width: 45%;
+    width: 100%;
     background-color: $color-grey-light;
-    box-shadow: 0 0.2rem .6rem rgba($color-grey-dark, 0.6);
-
-    @include respond(tab-land) {
-      width: 100%;
-    }
+    box-shadow: 0 0.2rem 0.6rem rgba($color-grey-dark, 0.6);
   }
 
   &__form {

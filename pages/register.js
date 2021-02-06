@@ -3,13 +3,46 @@ import Input from "../components/formElements/Input";
 import Layout from "../layouts/Layout";
 import Button from "../components/Button";
 import { getRegistrationForm } from "../lib/api";
+import Recaptcha from "react-recaptcha";
+import Head from "next/head";
 
 export default function Register({ registrationForm }) {
   const [formState, inputHandler] = useForm();
 
+  const recaptchaLoaded = () => {
+    inputHandler("recaptcha", "Loaded", false);
+  };
+
+  const recaptchaVerify = () => {
+    inputHandler("recaptcha", null, true);
+  };
+
   const onRegisterSubmit = (event) => {
     event.preventDefault();
     console.log(formState);
+    if (formState.isFormValid === true) {
+      const inputs = Object.entries(formState.inputs);
+      inputs.pop();
+
+      const data = {
+        token: process.env.API_REGISTER_SECRET,
+        recipient: inputs.map((i) => {
+          return { name: i[0], value: i[1].value };
+        }),
+      };
+      console.log(data);
+      fetch("/api/email/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+        .then((data) => {
+          console.log("Success:", data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
   };
 
   return (
@@ -18,7 +51,13 @@ export default function Register({ registrationForm }) {
         title: "Register",
       }}
     >
-        {console.log(registrationForm)}
+      <Head>
+        <script
+          src="https://www.google.com/recaptcha/api.js?&render=explicit"
+          async
+          defer
+        ></script>
+      </Head>
       <div className="Register">
         <h1 className="heading-primary">Conference Registration</h1>
         <p className="paragraph">
@@ -35,6 +74,7 @@ export default function Register({ registrationForm }) {
                 if (i.element == "input") {
                   return (
                     <Input
+                      key={i.name}
                       id={i.name}
                       element="text"
                       placeholder={i.name}
@@ -47,6 +87,7 @@ export default function Register({ registrationForm }) {
                 } else if (i.element === "textarea") {
                   return (
                     <Input
+                      key={i.name}
                       id={i.name}
                       element="textarea"
                       placeholder={i.name}
@@ -60,6 +101,7 @@ export default function Register({ registrationForm }) {
                 } else if (i.element === "select") {
                   return (
                     <Input
+                      key={i.name}
                       id={i.name}
                       element="select"
                       label={i.name}
@@ -72,6 +114,12 @@ export default function Register({ registrationForm }) {
                   );
                 }
               })}
+              <Recaptcha
+                sitekey={process.env.RECAPTCHA_SITE_KEY}
+                render="explicit"
+                onloadCallback={recaptchaLoaded}
+                verifyCallback={recaptchaVerify}
+              />
               <Button type="submit" disabled={!formState.isFormValid}>
                 Send
               </Button>

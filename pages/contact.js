@@ -8,6 +8,8 @@ import {
 } from "../components/formElements/validate";
 import Button from "../components/Button";
 import { getContactDetails } from "../lib/api";
+import Recaptcha from "react-recaptcha";
+import Head from "next/head";
 
 export default function Contact({ contactDetails }) {
   const [formState, inputHandler] = useForm({
@@ -23,32 +25,46 @@ export default function Contact({ contactDetails }) {
       value: "",
       isValid: false,
     },
+    recaptcha: {
+      value: null,
+      isValid: false,
+    },
   });
+
+  const recaptchaLoaded = () => {
+    inputHandler("recaptcha", "Loaded", false);
+  };
+
+  const recaptchaVerify = () => {
+    inputHandler("recaptcha", null, true);
+  };
 
   const onMessageSubmit = (event) => {
     event.preventDefault();
-    console.log(formState);
 
-    const data = {
-      token: process.env.API_EMAIL_SECRET,
-      recipient: {
-        name: formState.inputs.name.value,
-        email: formState.inputs.email.value,
-        message: formState.inputs.message.value,
-      },
-    };
+    console.log(formState)
+    if (formState.isFormValid === true) {
+      const data = {
+        token: process.env.API_EMAIL_SECRET,
+        recipient: {
+          name: formState.inputs.name.value,
+          email: formState.inputs.email.value,
+          message: formState.inputs.message.value,
+        },
+      };
 
-    fetch("/api/email/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    })
-      .then((data) => {
-        console.log("Success:", data);
+      fetch("/api/email/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+        .then((data) => {
+          console.log("Success:", data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
   };
 
   return (
@@ -57,6 +73,13 @@ export default function Contact({ contactDetails }) {
         title: "Contact",
       }}
     >
+      <Head>
+        <script
+          src="https://www.google.com/recaptcha/api.js?&render=explicit"
+          async
+          defer
+        ></script>
+      </Head>
       <div className="Contact">
         <h1 className="heading-primary">Contact</h1>
         <p className="paragraph">{contactDetails[0].desc}</p>
@@ -90,6 +113,12 @@ export default function Contact({ contactDetails }) {
                 onInput={inputHandler}
                 rules={[RULE_VALIDATOR_REQUIRED]}
                 errorMsg="Please enter your message."
+              />
+              <Recaptcha
+                sitekey={process.env.RECAPTCHA_SITE_KEY}
+                render="explicit"
+                onloadCallback={recaptchaLoaded}
+                verifyCallback={recaptchaVerify}
               />
               <Button type="submit" disabled={!formState.isFormValid}>
                 Send

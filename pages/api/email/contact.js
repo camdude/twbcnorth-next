@@ -58,7 +58,7 @@ export default async function sendContactEmail(req, res) {
   sgMail
     .send(messages)
     .then(() => {
-      console.log("Emails sent");
+      console.log("Contact emails sent");
     })
     .catch((error) => {
       console.error(error);
