@@ -56,8 +56,13 @@ const Footer = () => {
               </a>
             </li>
             <li className="Footer__listItem">
-              <a className="Footer__link link" href="/conferences">
-                Conferences
+              <a className="Footer__link link" href="/conference">
+                Conference
+              </a>
+            </li>
+            <li className="Footer__listItem">
+              <a className="Footer__link link" href="/talks">
+                Talks
               </a>
             </li>
             <li className="Footer__listItem">

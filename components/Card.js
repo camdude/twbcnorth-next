@@ -6,7 +6,7 @@ const Card = props => {
       <h2>{props.heading}</h2>
       <div className="Card__content">{props.children}</div>
       <div className="Card__action">
-        <Button to={props.link}>{props.btnText} &rarr;</Button>
+        <Button href={props.link}>{props.btnText} &rarr;</Button>
       </div>
     </div>
   );

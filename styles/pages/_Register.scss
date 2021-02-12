@@ -1,5 +1,21 @@
 .Register {
-  margin: 8rem 20%;
+  margin: 0 20%;
+  padding: 6rem 2rem;
+
+  @include respond(tab-land) {
+    margin: 0 10%;
+    flex-direction: column-reverse;
+    padding: 0;
+  }
+
+  @include respond(tab-port) {
+    margin: 0 4rem;
+    padding: 3rem 0;
+  }
+
+  @include respond(phone) {
+    margin: 0 2rem;
+  }
 
   &__content {
     display: flex;

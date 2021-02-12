@@ -1,6 +1,7 @@
+import Button from "../components/Button";
 import RichTextBlock from "../components/RichTextBlock";
 import Layout from "../layouts/Layout";
-import { getConferenceContent } from "../lib/api";
+import { getConferenceContent, urlFor } from "../lib/api";
 
 export default function About({ pageContent }) {
   return (
@@ -9,8 +10,11 @@ export default function About({ pageContent }) {
         title: "About",
       }}
     >
+      <img className="About__banner" src={urlFor(pageContent[0].banner)} />
       <div className="About__content">
         <RichTextBlock blocks={pageContent[0].content} />
+        <br />
+        <Button href="/register">Register Now</Button>
       </div>
     </Layout>
   );

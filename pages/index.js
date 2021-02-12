@@ -19,8 +19,8 @@ export default function Home() {
         <div className="CTA__container">
           <Card
             heading="This Years Conference"
-            btnText="Register"
-            link="/register"
+            btnText="Read More"
+            link="/conference"
           >
             Find out all the infomation for this years conference and then
             register for the conference.
@@ -28,7 +28,7 @@ export default function Home() {
           <Card
             heading="Past Conference Talks"
             btnText="Listen"
-            link="/conference"
+            link="/talks"
           >
             Missed a conference or want to listen to the talks again. You can do
             that all here.

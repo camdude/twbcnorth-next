@@ -1,4 +1,5 @@
 import BlockContent from "@sanity/block-content-to-react";
+import { urlFor } from "../lib/api";
 
 const RichTextBlock = ({ blocks, className }) => {
   const overrides = {
@@ -38,6 +39,25 @@ const RichTextBlock = ({ blocks, className }) => {
   };
 
   const serializers = {
+    list: (props) => {
+      if (props.type === "bullet") {
+        return (
+          <ul className={`${className || "RichTextBlock"}__ul`}>
+            {props.children}
+          </ul>
+        );
+      }
+      return (
+        <ol className={`${className || "RichTextBlock"}__ol`}>
+          {props.children}
+        </ol>
+      );
+    },
+    listItem: (props) => (
+      <li className={`${className || "RichTextBlock"}__li`}>
+        {props.children}
+      </li>
+    ),
     types: {
       block: (props) => {
         // Check if we have an override for the “style”
@@ -47,6 +67,17 @@ const RichTextBlock = ({ blocks, className }) => {
             overrides[props.node.style]({ children: props.children })
           : // otherwise, fallback to the provided default with all props
             BlockContent.defaultSerializers.types.block(props);
+      },
+      image: ({ node: { asset, alt, position = "center", crop, hotspot } }) => {
+        return (
+          <div
+            className={`${className || "RichTextBlock"}__imgContainer ${
+              className || "RichTextBlock"
+            }__imgContainer--${position}`}
+          >
+            <img src={urlFor(asset.url).width(300).fit("max")} alt={alt} />
+          </div>
+        );
       },
     },
   };
