@@ -161,5 +161,6 @@ export async function getStaticProps() {
   const contactDetails = await getContactDetails();
   return {
     props: { contactDetails },
+    revalidate: 1,
   };
 }

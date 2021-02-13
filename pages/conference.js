@@ -24,5 +24,6 @@ export async function getStaticProps() {
   const pageContent = await getConferenceContent();
   return {
     props: { pageContent },
+    revalidate: 1,
   };
 }

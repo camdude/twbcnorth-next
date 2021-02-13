@@ -138,5 +138,6 @@ export async function getStaticProps() {
   const registrationForm = await getRegistrationForm();
   return {
     props: { registrationForm },
+    revalidate: 1,
   };
 }

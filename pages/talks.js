@@ -53,5 +53,6 @@ export async function getStaticProps() {
   const talks = await getTalks();
   return {
     props: { talks },
+    revalidate: 1,
   };
 }

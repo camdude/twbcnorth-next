@@ -21,5 +21,6 @@ export async function getStaticProps() {
   const pageContent = await getAboutContent();
   return {
     props: { pageContent },
+    revalidate: 1,
   };
 }
