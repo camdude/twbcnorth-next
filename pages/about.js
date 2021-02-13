@@ -1,4 +1,3 @@
-import BlockContent from "@sanity/block-content-to-react";
 import RichTextBlock from "../components/RichTextBlock";
 import Layout from "../layouts/Layout";
 import { getAboutContent } from "../lib/api";
