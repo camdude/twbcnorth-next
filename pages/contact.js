@@ -11,6 +11,7 @@ import Recaptcha from "react-recaptcha";
 import Head from "next/head";
 import RichTextBlock from "../components/RichTextBlock";
 import Layout from "../layouts/Layout";
+import Router from "next/router";
 
 export default function Contact({ contactDetails }) {
   const [formState, inputHandler] = useForm({
@@ -41,9 +42,10 @@ export default function Contact({ contactDetails }) {
   };
 
   const onMessageSubmit = (event) => {
+    // TODO: Give feedback on submission result
     event.preventDefault();
 
-    console.log(formState)
+    console.log(formState);
     if (formState.isFormValid === true) {
       const data = {
         token: process.env.API_EMAIL_SECRET,
@@ -61,6 +63,7 @@ export default function Contact({ contactDetails }) {
       })
         .then((data) => {
           console.log("Success:", data);
+          Router.push("/contact/confirmation");
         })
         .catch((error) => {
           console.error("Error:", error);

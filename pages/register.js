@@ -5,6 +5,7 @@ import { getRegistrationForm } from "../lib/api";
 import Recaptcha from "react-recaptcha";
 import Head from "next/head";
 import Layout from "../layouts/Layout";
+import Router from "next/router";
 
 export default function Register({ registrationForm }) {
   const [formState, inputHandler] = useForm();
@@ -19,6 +20,7 @@ export default function Register({ registrationForm }) {
   };
 
   const onRegisterSubmit = (event) => {
+    // TODO: Give feedback on submission result
     event.preventDefault();
     if (formState.isFormValid === true) {
       const inputs = Object.entries(formState.inputs);
@@ -37,6 +39,7 @@ export default function Register({ registrationForm }) {
       })
         .then((data) => {
           console.log("Success:", data);
+          Router.push("/register/confirmation");
         })
         .catch((error) => {
           console.error("Error:", error);
