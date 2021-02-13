@@ -13,12 +13,13 @@ export default function Talks({ talks }) {
         <h1 className="heading-primary">Talks</h1>
         {talks.map((conf) => {
           return (
-            <>
+            <div key={conf.year}>
               <h2 className="heading-secondary">{conf.year}</h2>
               {conf.talkList.map((talk) => {
                 if (talk.audio._upload) {
                   return (
                     <Audio
+                      key={talk.title}
                       title="Uploading ..."
                       source={{
                         src: "",
@@ -29,6 +30,7 @@ export default function Talks({ talks }) {
                 } else {
                   return (
                     <Audio
+                      key={talk.audio.asset._ref}
                       title={talk.title}
                       source={{
                         src: urlForAsset(talk.audio.asset._ref),
@@ -39,7 +41,7 @@ export default function Talks({ talks }) {
                 }
               })}
               <br />
-            </>
+            </div>
           );
         })}
       </div>

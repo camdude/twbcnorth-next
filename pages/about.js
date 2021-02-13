@@ -10,7 +10,6 @@ export default function About({ pageContent }) {
         title: "About",
       }}
     >
-      {console.log(pageContent)}
       <div className="About__content">
         <h1 className="heading-primary">About</h1>
         <RichTextBlock blocks={pageContent[0].content} />
