@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useForm } from "../hooks/useForm";
 import Input from "../components/formElements/Input";
-import Layout from "../layouts/Layout";
 import {
   RULE_VALIDATOR_EMAIL,
   RULE_VALIDATOR_REQUIRED,
@@ -11,6 +10,7 @@ import { getContactDetails } from "../lib/api";
 import Recaptcha from "react-recaptcha";
 import Head from "next/head";
 import RichTextBlock from "../components/RichTextBlock";
+import Layout from "../layouts/Layout";
 
 export default function Contact({ contactDetails }) {
   const [formState, inputHandler] = useForm({
@@ -83,7 +83,6 @@ export default function Contact({ contactDetails }) {
       </Head>
       <div className="Contact">
         <h1 className="heading-primary">Contact</h1>
-        {/* <p className="paragraph">{contactDetails[0].desc}</p> */}
         <RichTextBlock blocks={contactDetails[0].desc} />
         <div className="Contact__content">
           <div className="Contact__card">

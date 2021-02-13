@@ -1,10 +1,10 @@
 import { useForm } from "../hooks/useForm";
 import Input from "../components/formElements/Input";
-import Layout from "../layouts/Layout";
 import Button from "../components/Button";
 import { getRegistrationForm } from "../lib/api";
 import Recaptcha from "react-recaptcha";
 import Head from "next/head";
+import Layout from "../layouts/Layout";
 
 export default function Register({ registrationForm }) {
   const [formState, inputHandler] = useForm();
