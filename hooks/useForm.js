@@ -17,10 +17,10 @@ const formReducer = (state, action) => {
           ...state.inputs,
           [action.id]: {
             value: action.value,
-            isValid: action.isValid
-          }
+            isValid: action.isValid,
+          },
         },
-        isFormValid: formValidity
+        isFormValid: formValidity,
       };
 
     default:
@@ -28,10 +28,10 @@ const formReducer = (state, action) => {
   }
 };
 
-export const useForm = initialFormInputs => {
+export const useForm = (initialFormInputs) => {
   const initialFormState = {
     inputs: initialFormInputs,
-    isFormValid: false
+    isFormValid: false,
   };
   const [formState, dispatch] = useReducer(formReducer, initialFormState);
 
@@ -41,7 +41,7 @@ export const useForm = initialFormInputs => {
         type: "INPUT_CHANGED",
         id: inputId,
         value: inputValue,
-        isValid: isInputValid
+        isValid: isInputValid,
       });
     },
     [dispatch]

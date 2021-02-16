@@ -20,7 +20,7 @@ export default function Contact({ contactDetails }) {
       isValid: false,
     },
     email: {
-      value: "",
+      value: "@",
       isValid: false,
     },
     message: {
@@ -45,7 +45,6 @@ export default function Contact({ contactDetails }) {
     // TODO: Give feedback on submission result
     event.preventDefault();
 
-    console.log(formState);
     if (formState.isFormValid === true) {
       const data = {
         token: process.env.API_EMAIL_SECRET,

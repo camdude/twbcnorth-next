@@ -6,10 +6,31 @@ import Recaptcha from "react-recaptcha";
 import Head from "next/head";
 import Layout from "../layouts/Layout";
 import Router from "next/router";
+import { useState } from "react";
 
 export default function Register({ registrationForm }) {
-  const [formState, inputHandler] = useForm();
-  // TODO: Fix initial state for select tags
+  let initialState = {};
+  registrationForm[0].form.forEach((i) => {
+    if (i.element === "select") {
+      initialState = {
+        ...initialState,
+        [i.name]: {
+          value: i.selection[0],
+          isValid: true,
+        },
+      };
+    } else {
+      initialState = {
+        ...initialState,
+        [i.name]: {
+          value: "",
+          isValid: false,
+        },
+      };
+    }
+  });
+  const [formState, inputHandler] = useForm(initialState);
+  const [formErrorMsg, setFormErrorMsg] = useState("");
 
   const recaptchaLoaded = () => {
     inputHandler("recaptcha", "Loaded", false);
@@ -43,6 +64,9 @@ export default function Register({ registrationForm }) {
         })
         .catch((error) => {
           console.error("Error:", error);
+          setFormErrorMsg(
+            "Error: Sorry we were unable to process your submission. If this continues please send us an email."
+          );
         });
     }
   };
@@ -82,6 +106,8 @@ export default function Register({ registrationForm }) {
                         element="text"
                         placeholder={i.name}
                         label={i.name}
+                        initialValue={formState.inputs[i.name].value}
+                        value={formState.inputs[i.name].value}
                         onInput={inputHandler}
                         rules={i.validation}
                         errorMsg={i.errMsg}
@@ -95,6 +121,8 @@ export default function Register({ registrationForm }) {
                         element="textarea"
                         placeholder={i.name}
                         label={i.name}
+                        initialValue={formState.inputs[i.name].value}
+                        value={formState.inputs[i.name].value}
                         initialValid={true}
                         onInput={inputHandler}
                         rules={i.validation}
@@ -109,6 +137,8 @@ export default function Register({ registrationForm }) {
                         element="select"
                         label={i.name}
                         options={i.selection}
+                        initialValue={formState.inputs[i.name].value}
+                        value={formState.inputs[i.name].value}
                         initialValid={true}
                         onInput={inputHandler}
                         rules={i.validation}
@@ -123,6 +153,7 @@ export default function Register({ registrationForm }) {
                   onloadCallback={recaptchaLoaded}
                   verifyCallback={recaptchaVerify}
                 />
+                <p>{formErrorMsg}</p>
                 <Button type="submit" disabled={!formState.isFormValid}>
                   Send
                 </Button>
