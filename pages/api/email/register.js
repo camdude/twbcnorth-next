@@ -55,7 +55,7 @@ export default async function completeRegistration(req, res) {
   await sgMail
     .send(messages)
     .then(() => {
-      console.log("Registration emails sent");
+      console.log(`New registration recieved and confirmation sent to ${recipient.email}`);
       res.status(200).json();
     })
     .catch((error) => {

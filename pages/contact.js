@@ -6,14 +6,16 @@ import {
   RULE_VALIDATOR_REQUIRED,
 } from "../components/formElements/validate";
 import Button from "../components/Button";
-import { getContactDetails } from "../lib/api";
+import { getContactDetails, getSiteSettings } from "../lib/api";
 import Recaptcha from "react-recaptcha";
 import Head from "next/head";
 import RichTextBlock from "../components/RichTextBlock";
 import Layout from "../layouts/Layout";
 import Router from "next/router";
 
-export default function Contact({ contactDetails }) {
+export default function Contact({ contactDetails, siteSettings }) {
+  console.log(siteSettings[0].adminEmail);
+
   const [formState, inputHandler] = useForm({
     name: {
       value: "",
@@ -53,6 +55,7 @@ export default function Contact({ contactDetails }) {
           email: formState.inputs.email.value,
           message: formState.inputs.message.value,
         },
+        adminEmail: siteSettings[0].adminEmail,
       };
 
       fetch("/api/email/contact", {
@@ -161,8 +164,9 @@ export default function Contact({ contactDetails }) {
 
 export async function getStaticProps() {
   const contactDetails = await getContactDetails();
+  const siteSettings = await getSiteSettings();
   return {
-    props: { contactDetails },
+    props: { contactDetails, siteSettings },
     revalidate: 1,
   };
 }

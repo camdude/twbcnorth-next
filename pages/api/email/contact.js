@@ -10,7 +10,7 @@ export default async function sendContactEmail(req, res) {
 
   const messages = [
     {
-      from: "dev@cameronclifford.com",
+      from: `dev@cameronclifford.com`,
       to: `${recipient.name} <${recipient.email}>`,
       subject: "Message Confirmation From TWBC North",
       html: `
@@ -32,8 +32,8 @@ export default async function sendContactEmail(req, res) {
         `,
     },
     {
-      from: "dev@cameronclifford.com",
-      to: `TWBC North <cmrnclffrd@gmail.com>`,
+      from: "twbcnorth.com <dev@cameronclifford.com>",
+      to: `TWBC North <${req.body.adminEmail}>`,
       subject: "New Contact Message From TWBC North",
       html: `
         <p>You have a new contact message from twbcnorth.com. Please see the details below</p>
@@ -58,7 +58,9 @@ export default async function sendContactEmail(req, res) {
   await sgMail
     .send(messages)
     .then(() => {
-      console.log("Contact emails sent");
+      console.log(
+        `New contact recieved and confirmation sent to ${recipient.email}`
+      );
       res.status(200).json();
     })
     .catch((error) => {

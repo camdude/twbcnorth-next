@@ -1,11 +1,20 @@
 import Card from "../components/Card";
 import Layout from "../layouts/Layout";
+import { getSiteSettings } from "../lib/api";
 
-export default function Home() {
+export default function Home(settings) {
+  const notificationData = settings.settings[0].notification;
+
   return (
     <Layout
       meta={{
         title: "Home",
+      }}
+      bannerMsg={{
+        active: notificationData.active,
+        header: notificationData.header,
+        message: notificationData.message,
+        type: notificationData.type,
       }}
     >
       <div className="Hero">
@@ -25,11 +34,7 @@ export default function Home() {
             Find out all the infomation for this years conference and then
             register for the conference.
           </Card>
-          <Card
-            heading="Past Conference Talks"
-            btnText="Listen"
-            link="/talks"
-          >
+          <Card heading="Past Conference Talks" btnText="Listen" link="/talks">
             Missed a conference or want to listen to the talks again. You can do
             that all here.
           </Card>
@@ -37,4 +42,12 @@ export default function Home() {
       </div>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const settings = await getSiteSettings();
+  return {
+    props: { settings },
+    revalidate: 1,
+  };
 }

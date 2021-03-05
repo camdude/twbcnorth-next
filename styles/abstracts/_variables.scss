@@ -12,8 +12,13 @@ $color-tertiary-light: lighten($color-tertiary, 8);
 $color-tertiary-dark: darken($color-tertiary, 8);
 
 $color-danger: #cc0000;
+$color-danger-dark: darken($color-danger, 8);
 $color-warning: #dd820a;
+$color-warning-dark: darken($color-warning, 8);
 $color-success: #50b04d;
+$color-success-dark: darken($color-success, 8);
+$color-neutral: #1e90ff;
+$color-neutral-dark: darken($color-neutral, 8);
 
 $color-white: #ffffff;
 $color-grey-lighter: #eeeeee;

@@ -1,0 +1,39 @@
+.NotificationBanner {
+  border-bottom: solid 0.5rem $color-tertiary-dark;
+  padding: 1rem 10%;
+  width: 100%;
+  background-color: $color-tertiary;
+  color: $color-white;
+  box-shadow: 0 0.6rem 1.2rem rgb($color-grey-dark, 60%);
+
+  &__header {
+  }
+
+  &__message {
+    margin: 0 auto;
+  }
+
+  &--neutral {
+    border-bottom: solid 0.5rem $color-neutral-dark;
+    background-color: $color-neutral;
+    color: $color-white;
+  }
+
+  &--success {
+    border-bottom: solid 0.5rem $color-success-dark;
+    background-color: $color-success;
+    color: $color-white;
+  }
+
+  &--warning {
+    border-bottom: solid 0.5rem $color-warning-dark;
+    background-color: $color-warning;
+    color: $color-white;
+  }
+
+  &--danger {
+    border-bottom: solid 0.5rem $color-danger-dark;
+    background-color: $color-danger;
+    color: $color-white;
+  }
+}
