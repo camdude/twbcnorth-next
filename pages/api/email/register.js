@@ -56,10 +56,10 @@ export default async function completeRegistration(req, res) {
     .send(messages)
     .then(() => {
       console.log("Registration emails sent");
+      res.status(200).json();
     })
     .catch((error) => {
       console.error(error);
+      res.status(error.code).json(error.message);
     });
-
-  res.status(200).json();
 }
