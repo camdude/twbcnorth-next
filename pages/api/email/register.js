@@ -52,7 +52,7 @@ export default async function completeRegistration(req, res) {
     },
   ];
 
-  sgMail
+  await sgMail
     .send(messages)
     .then(() => {
       console.log("Registration emails sent");

@@ -55,7 +55,7 @@ export default async function sendContactEmail(req, res) {
     },
   ];
 
-  sgMail
+  await sgMail
     .send(messages)
     .then(() => {
       console.log("Contact emails sent");
