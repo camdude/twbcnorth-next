@@ -7,6 +7,7 @@ import Head from "next/head";
 import Layout from "../layouts/Layout";
 import Router from "next/router";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Register({ registrationForm }) {
   let initialState = {};
@@ -31,6 +32,7 @@ export default function Register({ registrationForm }) {
   });
   const [formState, inputHandler] = useForm(initialState);
   const [formErrorMsg, setFormErrorMsg] = useState("");
+  const [formSending, setFormSending] = useState("prepare");
 
   const recaptchaLoaded = () => {
     inputHandler("recaptcha", "Loaded", false);
@@ -41,7 +43,6 @@ export default function Register({ registrationForm }) {
   };
 
   const onRegisterSubmit = (event) => {
-    // TODO: Give feedback on submission result
     event.preventDefault();
     if (formState.isFormValid === true) {
       const inputs = Object.entries(formState.inputs);
@@ -53,19 +54,23 @@ export default function Register({ registrationForm }) {
           return { name: i[0], value: i[1].value };
         }),
       };
+      setFormSending("sending");
+
       fetch("/api/email/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       })
         .then((data) => {
+          setFormSending("sent");
           console.log("Success:", data);
           Router.push("/register/confirmation");
         })
         .catch((error) => {
+          setFormSending("failed");
           console.error("Error:", error);
           setFormErrorMsg(
-            "Error: Sorry we were unable to process your submission. If this continues please send us an email."
+            "Sorry we were unable to process your submission. If this continues please send us an email."
           );
         });
     }
@@ -153,9 +158,9 @@ export default function Register({ registrationForm }) {
                   onloadCallback={recaptchaLoaded}
                   verifyCallback={recaptchaVerify}
                 />
-                <p>{formErrorMsg}</p>
+                {formSending !== "failed" || <p className="Register__errorMsg">{formErrorMsg}</p>}
                 <Button type="submit" disabled={!formState.isFormValid}>
-                  Send
+                  {formSending === "sending" ? <FontAwesomeIcon icon="spinner" size="lg" pulse/> : "Send"}
                 </Button>
               </form>
             </div>

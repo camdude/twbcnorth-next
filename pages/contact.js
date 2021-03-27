@@ -12,9 +12,10 @@ import Head from "next/head";
 import RichTextBlock from "../components/RichTextBlock";
 import Layout from "../layouts/Layout";
 import Router from "next/router";
+import { useState } from "react";
 
 export default function Contact({ contactDetails, siteSettings }) {
-  console.log(siteSettings[0].adminEmail);
+  const [formSending, setFormSending] = useState("prepare");
 
   const [formState, inputHandler] = useForm({
     name: {
@@ -58,16 +59,20 @@ export default function Contact({ contactDetails, siteSettings }) {
         adminEmail: siteSettings[0].adminEmail,
       };
 
+      setFormSending("sending")
+
       fetch("/api/email/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       })
         .then((data) => {
+          setFormSending("sent")
           console.log("Success:", data);
           Router.push("/contact/confirmation");
         })
         .catch((error) => {
+          setFormSending("failed")
           console.error("Error:", error);
         });
     }
@@ -126,10 +131,11 @@ export default function Contact({ contactDetails, siteSettings }) {
                 onloadCallback={recaptchaLoaded}
                 verifyCallback={recaptchaVerify}
               />
+              {formSending !== "failed" || <p className="Contact__errorMsg">Sorry we could not process your form submission. Please try again or if the issue continues send us an email instead.</p>}
               <Button type="submit" disabled={!formState.isFormValid}>
-                Send
+                {formSending === "sending" ? <FontAwesomeIcon icon="spinner" size="lg" pulse/> : "Send"}
               </Button>
-            </form>
+           </form>
           </div>
           <div className="Contact__card">
             <h2 className="heading-secondary">Contact Info</h2>

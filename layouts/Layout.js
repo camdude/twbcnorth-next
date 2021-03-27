@@ -18,7 +18,7 @@ const Layout = ({ meta, bannerMsg, children }) => {
   return (
     <div>
       <Head>
-        <title>{`Cameron Clifford | ${meta.title}`}</title>
+        <title>{`TWBC North | ${meta.title}`}</title>
       </Head>
       {notification}
       <Navbar />
