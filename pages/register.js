@@ -8,6 +8,7 @@ import Layout from "../layouts/Layout";
 import Router from "next/router";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import RichTextBlock from "../components/RichTextBlock";
 
 export default function Register({ registrationForm }) {
   let initialState = {};
@@ -91,12 +92,8 @@ export default function Register({ registrationForm }) {
       </Head>
       <div className="Register">
         <h1 className="heading-primary">Conference Registration</h1>
-        <p className="paragraph">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab magni
-          praesentium ut nihil. Eius corrupti facilis nisi dignissimos esse sed,
-          vel, fuga quas ipsum accusantium maiores incidunt! Excepturi, quas
-          necessitatibus.
-        </p>
+        <RichTextBlock blocks={registrationForm[0].desc} />
+        <br />
         {registrationForm[0].active ? (
           <div className="Register__content">
             <div className="Register__card">
