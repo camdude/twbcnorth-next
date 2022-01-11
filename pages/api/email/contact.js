@@ -59,12 +59,12 @@ export default async function sendContactEmail(req, res) {
     .send(messages)
     .then(() => {
       console.log(
-        `New contact recieved and confirmation sent to ${recipient.email}`
+        `New contact received and confirmation sent to ${recipient.email}`
       );
-      res.status(200).json();
+      return res.status(200).json();
     })
     .catch((error) => {
       console.error(error);
-      res.status(error.code).json(error.message);
+      return res.status(error.code).json(error.message);
     });
 }

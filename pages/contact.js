@@ -59,21 +59,25 @@ export default function Contact({ contactDetails, siteSettings }) {
         adminEmail: siteSettings[0].adminEmail,
       };
 
-      setFormSending("sending")
+      setFormSending("sending");
 
       fetch("/api/email/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       })
-        .then((data) => {
-          setFormSending("sent")
-          console.log("Success:", data);
-          Router.push("/contact/confirmation");
+        .then((res) => {
+          if (!res.ok) {
+            throw Error(res.statusText);
+          } else {
+            setFormSending("sent");
+            console.log("Success:", data);
+            Router.push("/contact/confirmation");
+          }
         })
         .catch((error) => {
-          setFormSending("failed")
-          console.error("Error:", error);
+          setFormSending("failed");
+          console.error(error);
         });
     }
   };
@@ -131,11 +135,20 @@ export default function Contact({ contactDetails, siteSettings }) {
                 onloadCallback={recaptchaLoaded}
                 verifyCallback={recaptchaVerify}
               />
-              {formSending !== "failed" || <p className="Contact__errorMsg">Sorry we could not process your form submission. Please try again or if the issue continues send us an email instead.</p>}
+              {formSending !== "failed" || (
+                <p className="Contact__errorMsg">
+                  Sorry we could not process your form submission. Please try
+                  again or if the issue continues send us an email instead.
+                </p>
+              )}
               <Button type="submit" disabled={!formState.isFormValid}>
-                {formSending === "sending" ? <FontAwesomeIcon icon="spinner" size="lg" pulse/> : "Send"}
+                {formSending === "sending" ? (
+                  <FontAwesomeIcon icon="spinner" size="lg" pulse />
+                ) : (
+                  "Send"
+                )}
               </Button>
-           </form>
+            </form>
           </div>
           <div className="Contact__card">
             <h2 className="heading-secondary">Contact Info</h2>

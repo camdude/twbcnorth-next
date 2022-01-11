@@ -62,16 +62,20 @@ export default function Register({ registrationForm }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       })
-        .then((data) => {
-          setFormSending("sent");
-          console.log("Success:", data);
-          Router.push("/register/confirmation");
+        .then((res) => {
+          if (!res.ok) {
+            throw Error(res.statusText);
+          } else {
+            setFormSending("sent");
+            console.log("Success:", data);
+            Router.push("/register/confirmation");
+          }
         })
         .catch((error) => {
           setFormSending("failed");
           console.error("Error:", error);
           setFormErrorMsg(
-            "Sorry we were unable to process your submission. If this continues please send us an email."
+            "Sorry we were unable to process your submission. If this continues, please let us know by sending us an email."
           );
         });
     }
@@ -155,9 +159,15 @@ export default function Register({ registrationForm }) {
                   onloadCallback={recaptchaLoaded}
                   verifyCallback={recaptchaVerify}
                 />
-                {formSending !== "failed" || <p className="Register__errorMsg">{formErrorMsg}</p>}
+                {formSending !== "failed" || (
+                  <p className="Register__errorMsg">{formErrorMsg}</p>
+                )}
                 <Button type="submit" disabled={!formState.isFormValid}>
-                  {formSending === "sending" ? <FontAwesomeIcon icon="spinner" size="lg" pulse/> : "Send"}
+                  {formSending === "sending" ? (
+                    <FontAwesomeIcon icon="spinner" size="lg" pulse />
+                  ) : (
+                    "Send"
+                  )}
                 </Button>
               </form>
             </div>
