@@ -4,7 +4,7 @@
   border: none;
   border-radius: 2rem;
   padding: 0.4rem 2rem;
-  background-color: $color-tertiary;
+  background-color: var(--color-tertiary);
   color: $color-black;
   font-size: 1.2rem;
   font-weight: bold;
@@ -15,7 +15,7 @@
   
 
   &:hover {
-    background-color: $color-tertiary-dark;
+    background-color: var(--color-tertiary-dark);
     color: $color-black;
   }
 }

@@ -30,7 +30,7 @@
   }
 
   &__heading {
-    color: $color-tertiary;
+    color: var(--color-tertiary);
   }
 
   &__list {
@@ -42,7 +42,7 @@
 
   &__link {
     text-decoration: none;
-    color: $color-primary-light;
+    color: var(--color-primary-light);
   }
 
   &__copyright {

@@ -2,8 +2,8 @@ import Card from "../components/Card";
 import Layout from "../layouts/Layout";
 import { getSiteSettings } from "../lib/api";
 
-export default function Home(settings) {
-  const notificationData = settings.settings[0].notification;
+export default function Home({siteSettings}) {
+  const notificationData = siteSettings[0].notification;
 
   return (
     <Layout
@@ -16,6 +16,7 @@ export default function Home(settings) {
         message: notificationData.message,
         type: notificationData.type,
       }}
+      theme={siteSettings[0].themeColours}
     >
       <div className="Hero">
         <div className="Hero__heading">Tasmanian Women's Bible Conference</div>
@@ -45,9 +46,9 @@ export default function Home(settings) {
 }
 
 export async function getStaticProps() {
-  const settings = await getSiteSettings();
+  const siteSettings = await getSiteSettings();
   return {
-    props: { settings },
+    props: { siteSettings },
     revalidate: 1,
   };
 }

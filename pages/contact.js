@@ -87,6 +87,7 @@ export default function Contact({ contactDetails, siteSettings }) {
       meta={{
         title: "Contact",
       }}
+      theme={siteSettings[0].themeColours}
     >
       <Head>
         <script

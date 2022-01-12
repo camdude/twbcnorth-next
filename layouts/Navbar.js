@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TwbcLogo from "../public/logo.svg";
 
-const Navbar = () => {
+const Navbar = ({ colour="#213f5a" }) => {
   const [navOpen, setnavOpen] = useState(false);
 
   return (
@@ -22,7 +22,7 @@ const Navbar = () => {
         <div className="Navbar__title">
           <Link href="/">
             <a>
-              <TwbcLogo fill="#213f5a"/>
+              <TwbcLogo fill={colour} />
             </a>
           </Link>
         </div>

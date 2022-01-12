@@ -2,8 +2,10 @@ import Head from "next/head";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import NotificationBanner from "../components/NotificationBanner";
+import { useEffect } from "react";
+import ThemeProvider from "./ThemeProvider";
 
-const Layout = ({ meta, bannerMsg, children }) => {
+const Layout = ({ meta, bannerMsg, theme, children }) => {
   let notification;
   if (bannerMsg && bannerMsg.active) {
     notification = (
@@ -16,15 +18,15 @@ const Layout = ({ meta, bannerMsg, children }) => {
   }
 
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <Head>
         <title>{`TWBC North | ${meta.title}`}</title>
       </Head>
       {notification}
-      <Navbar />
+      <Navbar colour={theme.secondary.hex}/>
       <main>{children}</main>
       <Footer />
-    </div>
+    </ThemeProvider>
   );
 };
 

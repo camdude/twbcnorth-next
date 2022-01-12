@@ -19,26 +19,26 @@
 
   &--primary {
     color: $color-white;
-    background: $color-primary;
+    background: var(--color-primary);
 
     & p > a:link,
     & p > a:visited {
-      color: $color-tertiary;
+      color: var(--color-tertiary);
 
       &:hover,
       &:active {
-        color: $color-tertiary-dark;
+        color: var(--color-tertiary-dark);
       }
     }
   }
 
   &--secondary {
     color: $color-white;
-    background: $color-secondary-dark;
+    background: var(--color-secondary-dark);
 
     & p > a:link,
     & p > a:visited {
-      color: $color-tertiary;
+      color: var(--color-tertiary);
 
       &:hover,
       &:active {
@@ -49,15 +49,15 @@
 
   &--tertiary {
     color: $color-white;
-    background: $color-tertiary;
+    background: var(--color-tertiary);
 
     & p > a:link,
     & p > a:visited {
-      color: $color-primary-light;
+      color: var(--color-primary-light);
 
       &:hover,
       &:active {
-        color: $color-primary;
+        color: var(--color-primary);
       }
     }
   }
@@ -68,11 +68,11 @@
 
     & p > a:link,
     & p > a:visited {
-      color: $color-tertiary-dark;
+      color: var(--color-tertiary-dark);
 
       &:hover,
       &:active {
-        color: $color-tertiary-light;
+        color: var(--color-tertiary-light);
       }
     }
   }
@@ -83,11 +83,11 @@
 
     & p > a:link,
     & p > a:visited {
-      color: $color-tertiary-dark;
+      color: var(--color-tertiary-dark);
 
       &:hover,
       &:active {
-        color: $color-tertiary-light;
+        color: var(--color-tertiary-light);
       }
     }
   }
@@ -98,11 +98,11 @@
 
     & p > a:link,
     & p > a:visited {
-      color: $color-tertiary-dark;
+      color: var(--color-tertiary-dark);
 
       &:hover,
       &:active {
-        color: $color-tertiary-light;
+        color: var(--color-tertiary-light);
       }
     }
   }

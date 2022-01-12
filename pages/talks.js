@@ -1,13 +1,14 @@
 import Audio from "../components/Audio";
 import Layout from "../layouts/Layout";
-import { getTalks, urlForAsset } from "../lib/api";
+import { getSiteSettings, getTalks, urlForAsset } from "../lib/api";
 
-export default function Talks({ talks }) {
+export default function Talks({ talks, siteSettings }) {
   return (
     <Layout
       meta={{
         title: "Talks",
       }}
+      theme={siteSettings[0].themeColours}
     >
       <div className="Talks__content">
         <h1 className="heading-primary">Talks</h1>
@@ -51,8 +52,9 @@ export default function Talks({ talks }) {
 
 export async function getStaticProps() {
   const talks = await getTalks();
+  const siteSettings = await getSiteSettings();
   return {
-    props: { talks },
+    props: { talks, siteSettings },
     revalidate: 1,
   };
 }

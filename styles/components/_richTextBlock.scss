@@ -5,7 +5,7 @@
     font-size: 4rem;
     line-height: 1.25;
     text-transform: capitalize;
-    color: $color-primary-light;
+    color: var(--color-primary-light);
   }
 
   &__h2 {
@@ -13,7 +13,7 @@
     margin-bottom: 0.8rem;
     font-size: 3rem;
     text-transform: capitalize;
-    color: $color-secondary-light;
+    color: var(--color-secondary-light);
   }
 
   &__h3 {
@@ -29,7 +29,7 @@
     margin-bottom: 0.2rem;
     font-size: 2rem;
     text-transform: capitalize;
-    color: $color-secondary;
+    color: var(--color-secondary);
   }
 
   &__h5 {
@@ -38,7 +38,7 @@
     font-size: $default-font-size;
     font-style: italic;
     text-transform: capitalize;
-    color: $color-tertiary-dark;
+    color: var(--color-tertiary-dark);
   }
 
   &__h6 {
@@ -47,13 +47,13 @@
     font-size: 1.4rem;
     font-weight: 500;
     text-transform: capitalize;
-    color: $color-primary-light;
+    color: var(--color-primary-light);
   }
 
   &__quote {
     display: block;
     margin: 1rem 0;
-    border-left: 3px solid $color-tertiary;
+    border-left: 3px solid var(--color-tertiary);
     padding: 0.5rem 1.5rem;
     font-size: 1.6rem;
     font-style: italic;
@@ -75,12 +75,12 @@
 
     & > a {
       text-decoration: none;
-      color: $color-secondary;
+      color: var(--color-secondary);
       cursor: pointer;
 
       &:hover {
         text-decoration: underline;
-        color: $color-primary-light;
+        color: var(--color-primary-light);
       }
     }
   }

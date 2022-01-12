@@ -1,7 +1,7 @@
 import { useForm } from "../hooks/useForm";
 import Input from "../components/formElements/Input";
 import Button from "../components/Button";
-import { getRegistrationForm } from "../lib/api";
+import { getRegistrationForm, getSiteSettings } from "../lib/api";
 import Recaptcha from "react-recaptcha";
 import Head from "next/head";
 import Layout from "../layouts/Layout";
@@ -10,7 +10,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RichTextBlock from "../components/RichTextBlock";
 
-export default function Register({ registrationForm }) {
+export default function Register({ registrationForm, siteSettings }) {
   let initialState = {};
   registrationForm[0].form.forEach((i) => {
     if (i.element === "select") {
@@ -86,6 +86,7 @@ export default function Register({ registrationForm }) {
       meta={{
         title: "Register",
       }}
+      theme={siteSettings[0].themeColours}
     >
       <Head>
         <script
@@ -182,8 +183,9 @@ export default function Register({ registrationForm }) {
 
 export async function getStaticProps() {
   const registrationForm = await getRegistrationForm();
+  const siteSettings = await getSiteSettings();
   return {
-    props: { registrationForm },
+    props: { registrationForm, siteSettings },
     revalidate: 1,
   };
 }

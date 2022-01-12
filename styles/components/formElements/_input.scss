@@ -39,7 +39,7 @@
     &:active,
     &:focus {
       outline: none;
-      border: 1px solid $color-primary;
+      border: 1px solid var(--color-primary);
       background: $color-grey-light;
     }
 

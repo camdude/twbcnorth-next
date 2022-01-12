@@ -1,8 +1,8 @@
 .NotificationBanner {
-  border-bottom: solid 0.5rem $color-tertiary-dark;
+  border-bottom: solid 0.5rem var(--color-tertiary-dark);
   padding: 1rem 10%;
   width: 100%;
-  background-color: $color-tertiary;
+  background-color: var(--color-tertiary);
   color: $color-white;
   box-shadow: 0 0.6rem 1.2rem rgb($color-grey-dark, 60%);
 

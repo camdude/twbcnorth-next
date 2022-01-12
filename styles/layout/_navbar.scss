@@ -4,7 +4,7 @@
   padding: 0 10%;
   width: 100%;
   min-height: 40px;
-  background: $color-primary;
+  background: var(--color-primary);
   color: $color-white;
 
   @include respond(tab-port) {
@@ -92,21 +92,21 @@
     text-decoration: none;
 
     &:hover {
-      color: $color-secondary;
+      color: var(--color-secondary);
       text-decoration: underline;
     }
 
     @include respond(tab-port) {
       margin: 0;
-      border-top: 1px solid $color-primary;
+      border-top: 1px solid var(--color-primary);
       padding: 1rem 4rem;
       width: 100%;
-      background-color: $color-primary-light;
+      background-color: var(--color-primary-light);
       text-align: center;
 
       &:hover {
         color: $color-black;
-        background-color: $color-secondary-light;
+        background-color: var(--color-secondary-light);
         text-decoration: none;
       }
     }
